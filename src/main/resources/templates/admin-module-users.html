@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Module users</title></head>
+<body>
+<h2>Users in: <span th:text="${mod.description}"></span></h2>
+<p><a th:href="@{/admin/modules/{m}(m=${mod.name})}">Back to module</a></p>
+
+<form th:action="@{/admin/modules/{m}/users(m=${mod.name})}" method="get">
+    <input name="q" th:value="${q}" placeholder="Search by email">
+    <button type="submit">Search</button>
+    <a th:href="@{/admin/modules/{m}/users(m=${mod.name})}">Clear</a>
+</form>
+
+<table border="1" cellpadding="6">
+    <tr><th>Email</th><th>Role</th><th>Features they can use</th></tr>
+    <tr th:if="${#lists.isEmpty(users)}"><td colspan="3">No users found</td></tr>
+    <tr th:each="u : ${users}">
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.role}"></td>
+        <td th:text="${u.featureNames}"></td>
+    </tr>
+</table>
+
+<p>
+    <a th:if="${pg.hasPrevious()}"
+       th:href="@{/admin/modules/{m}/users(m=${mod.name},q=${q},page=${pg.number - 1})}">Previous</a>
+    Page <span th:text="${pg.number + 1}"></span>
+    of <span th:text="${pg.totalPages == 0 ? 1 : pg.totalPages}"></span>
+    (<span th:text="${pg.totalElements}"></span> users)
+    <a th:if="${pg.hasNext()}"
+       th:href="@{/admin/modules/{m}/users(m=${mod.name},q=${q},page=${pg.number + 1})}">Next</a>
+</p>
+</body>
+</html>

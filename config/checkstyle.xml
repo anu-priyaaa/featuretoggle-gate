@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<!-- Small, enforced rule set. Add rules here as the team agrees on them. -->
+<module name="Checker">
+    <property name="severity" value="warning"/>
+    <property name="fileExtensions" value="java"/>
+
+
+    <module name="TreeWalker">
+        <module name="UnusedImports"/>
+        <module name="RedundantImport"/>
+        <module name="EmptyStatement"/>
+        <module name="EmptyBlock">
+            <property name="option" value="text"/>
+        </module>
+        <module name="EqualsHashCode"/>
+        <module name="MissingSwitchDefault"/>
+        <module name="ModifierOrder"/>
+        <module name="RedundantModifier"/>
+        <module name="UpperEll"/>
+        <module name="ArrayTypeStyle"/>
+        <module name="InnerAssignment"/>
+        <module name="StringLiteralEquality"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+    </module>
+</module>

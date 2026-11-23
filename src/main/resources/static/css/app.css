@@ -1,0 +1,39 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, Arial, sans-serif; background: #f1f6ef; color: #1f2d1f; }
+body.auth { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.card { width: 100%; max-width: 400px; background: #fff; padding: 24px; border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0,0,0,.1); }
+h1 { margin: 0 0 16px; font-size: 1.4rem; color: #2e7d32; text-align: center; }
+label { display: block; margin-bottom: 12px; font-size: .9rem; font-weight: 600; }
+input { display: block; width: 100%; margin-top: 4px; padding: 12px; font-size: 1rem;
+        border: 1px solid #b5c7b3; border-radius: 8px; }
+button { width: 100%; padding: 13px; font-size: 1rem; font-weight: 600; color: #fff;
+         background: #2e7d32; border: 0; border-radius: 8px; cursor: pointer; }
+button:hover { background: #256628; }
+.error { background: #fdecea; color: #b71c1c; padding: 10px; border-radius: 8px; }
+.ok { background: #e8f5e9; color: #1b5e20; padding: 10px; border-radius: 8px; }
+.alt { text-align: center; margin: 16px 0 0; font-size: .9rem; }
+a { color: #2e7d32; }
+
+/* ---- app pages */
+.top { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px;
+       background: #2e7d32; color: #fff; font-weight: 600; }
+.top a { color: #fff; text-decoration: none; }
+.top form { margin: 0; }
+.page { max-width: 900px; margin: 0 auto; padding: 16px; }
+h1.left { text-align: left; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.tile { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 90px;
+        padding: 12px; background: #fff; border-radius: 12px; text-decoration: none; font-weight: 600;
+        box-shadow: 0 1px 6px rgba(0,0,0,.1); }
+.tile:active { background: #e8f5e9; }
+.panel { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 16px;
+         box-shadow: 0 1px 6px rgba(0,0,0,.1); }
+.panel h2 { margin: 0 0 10px; font-size: 1.1rem; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid #e0e8de; white-space: nowrap; }
+th { background: #f1f6ef; }
+.addform { margin-top: 14px; padding-top: 6px; border-top: 1px dashed #b5c7b3; }
+.addform h3 { margin: 8px 0; font-size: 1rem; }
+button.small { width: auto; padding: 6px 12px; font-size: .85rem; background: #1b5e20; }

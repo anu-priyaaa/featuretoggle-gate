@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Feature access</title></head>
+<body>
+<h2>Access: <span th:text="${feature.name}"></span></h2>
+<p><a th:href="@{/admin/modules/{m}(m=${feature.moduleName})}">Back to module</a></p>
+
+<form th:action="@{/admin/feature/{c}/access(c=${feature.code})}" method="get">
+    <input name="q" th:value="${q}" placeholder="Search by email">
+    <button type="submit">Search</button>
+    <a th:href="@{/admin/feature/{c}/access(c=${feature.code})}">Clear</a>
+</form>
+
+<table border="1" cellpadding="6">
+    <tr><th>Email</th><th>Role</th><th>Has access</th><th>Action</th></tr>
+    <tr th:if="${#lists.isEmpty(users)}"><td colspan="4">No users found</td></tr>
+    <tr th:each="u : ${users}">
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.role}"></td>
+        <td th:text="${u.granted} ? 'Yes' : 'No'"></td>
+        <td>
+            <span th:if="${u.role == 'ADMIN'}">Always</span>
+
+            <form th:if="${u.role != 'ADMIN' and !u.granted}"
+                  th:action="@{/admin/feature/{c}/grant(c=${feature.code})}" method="post">
+                <input type="hidden" name="userId" th:value="${u.id}">
+                <input type="hidden" name="q" th:value="${q}">
+                <input type="hidden" name="page" th:value="${pg.number}">
+                <button>Grant</button>
+            </form>
+
+            <form th:if="${u.role != 'ADMIN' and u.granted}"
+                  th:action="@{/admin/feature/{c}/revoke(c=${feature.code})}" method="post">
+                <input type="hidden" name="userId" th:value="${u.id}">
+                <input type="hidden" name="q" th:value="${q}">
+                <input type="hidden" name="page" th:value="${pg.number}">
+                <button>Revoke</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<p>
+    <a th:if="${pg.hasPrevious()}"
+       th:href="@{/admin/feature/{c}/access(c=${feature.code},q=${q},page=${pg.number - 1})}">Previous</a>
+    Page <span th:text="${pg.number + 1}"></span>
+    of <span th:text="${pg.totalPages == 0 ? 1 : pg.totalPages}"></span>
+    (<span th:text="${pg.totalElements}"></span> users)
+    <a th:if="${pg.hasNext()}"
+       th:href="@{/admin/feature/{c}/access(c=${feature.code},q=${q},page=${pg.number + 1})}">Next</a>
+</p>
+</body>
+</html>

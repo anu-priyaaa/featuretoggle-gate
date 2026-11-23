@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header class="top">
+    <span>🌾 Farmer Portal</span>
+    <form th:action="@{/logout}" method="post"><button class="small">Logout</button></form>
+</header>
+<main class="page">
+    <h1 class="left">Welcome, <span th:text="${user}"></span></h1>
+    <p th:if="${#lists.isEmpty(features)}">No features enabled yet. Ask the admin to turn modules on.</p>
+    <div class="grid">
+        <a class="tile" th:each="f : ${features}" th:href="@{/modules/{n}(n=${f.name})}" th:text="${f.description}"></a>
+    </div>
+</main>
+</body>
+</html>

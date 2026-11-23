@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Module</title></head>
+<body>
+<h2 th:text="${mod.description}"></h2>
+<p>Module status: <b th:text="${mod.enabled} ? 'ON' : 'OFF'"></b></p>
+<p><a th:href="@{/admin/modules/{m}/users(m=${mod.name})}">See all users in this module</a></p>
+
+<table border="1" cellpadding="6">
+    <tr><th>Feature</th><th>Status</th><th>Users with access</th><th>Actions</th></tr>
+    <tr th:each="f : ${featureRows}">
+        <td th:text="${f.name}"></td>
+        <td th:text="${f.enabled} ? 'ON' : 'OFF'"></td>
+        <td th:text="${f.userCount}"></td>
+        <td>
+            <form th:action="@{/admin/feature/{c}/toggle(c=${f.code})}" method="post" style="display:inline">
+                <button th:text="${f.enabled} ? 'Turn OFF' : 'Turn ON'"></button>
+            </form>
+            <a th:href="@{/admin/feature/{c}/access(c=${f.code})}">Manage access</a>
+        </td>
+    </tr>
+</table>
+<p><a th:href="@{/admin/features}">Back to modules</a></p>
+</body>
+</html>

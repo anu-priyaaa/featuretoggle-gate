@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Modules</title></head>
+<body>
+<h2>Modules (Admin)</h2>
+<table border="1" cellpadding="6">
+    <tr><th>Module</th><th>Status</th><th>Features</th><th>Users with access</th><th>Actions</th></tr>
+    <tr th:each="m : ${modules}">
+        <td th:text="${m.description}"></td>
+        <td th:text="${m.enabled} ? 'ON' : 'OFF'"></td>
+        <td th:text="${m.featureCount}"></td>
+        <td th:text="${m.userCount}"></td>
+        <td>
+            <form th:action="@{/admin/modules/{n}/toggle(n=${m.name})}" method="post" style="display:inline">
+                <button th:text="${m.enabled} ? 'Turn OFF' : 'Turn ON'"></button>
+            </form>
+            <a th:href="@{/admin/modules/{n}(n=${m.name})}">Open</a>
+        </td>
+    </tr>
+</table>
+<p><a th:href="@{/dashboard}">My dashboard</a></p>
+<form th:action="@{/logout}" method="post"><button>Logout</button></form>
+</body>
+</html>

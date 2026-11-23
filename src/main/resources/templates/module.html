@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Module</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header class="top"><a th:href="@{/dashboard}">&larr; Dashboard</a></header>
+<main class="page">
+    <h1 class="left" th:text="${title}"></h1>
+
+    <section class="panel" th:each="s, st : ${sections}">
+        <h2 th:text="${s.title}"></h2>
+        <div class="scroll">
+            <table>
+                <thead><tr><th th:each="h : ${s.headers}" th:text="${h}"></th></tr></thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(s.rows)}">
+                    <td th:colspan="${#lists.size(s.headers)}">No data</td>
+                </tr>
+                <tr th:each="r : ${s.rows}">
+                    <td th:each="c : ${r}" th:text="${c}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <form class="addform" method="post" th:if="${!#lists.isEmpty(fields[st.index])}"
+              th:action="@{/modules/{m}/features/{c}/add(m=${module},c=${codes[st.index]})}">
+            <h3>Add new</h3>
+            <label th:each="h, i : ${fields[st.index]}"><span th:text="${h}"></span>
+                <input th:name="${'f' + i.index}" maxlength="200" required></label>
+            <button type="submit">Add</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>
