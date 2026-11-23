@@ -33,7 +33,7 @@ class FeatureFlagServiceTest {
     @Test
     void isEnabledReflectsStoredSwitch() {
         when(repo.findByName("A")).thenReturn(Optional.of(flag("A", true)));
-        assertFalse(service.isEnabled("A"));
+        assertTrue(service.isEnabled("A"));
     }
 
     @Test
