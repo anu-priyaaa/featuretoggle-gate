@@ -76,12 +76,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # Fails on any HIGH or CRITICAL vulnerability that has a fix available.
-      - uses: aquasecurity/trivy-action@0.28.0
-        with:
-          scan-type: fs
-          scan-ref: .
-          scanners: vuln
-          severity: HIGH,CRITICAL
-          ignore-unfixed: true
-          exit-code: '1'
-          format: table
+      # Runs the official Trivy image directly (no third-party action to break).
+      - name: Trivy scan
+        run: |
+          docker run --rm -v "$PWD:/src" -w /src ghcr.io/aquasecurity/trivy:0.58.1 \
+            fs --scanners vuln --severity HIGH,CRITICAL --ignore-unfixed \
+            --exit-code 1 --format table .
